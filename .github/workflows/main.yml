@@ -10,7 +10,7 @@ jobs:
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.IP }}
-        username: ${{ secrets.USERNAME }}
+        username: ${{ secrets.USER }}
         key: ${{ secrets.KEY }}
         script: |
           whoami
