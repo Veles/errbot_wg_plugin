@@ -16,4 +16,4 @@ jobs:
           cd /root/errbot_root && git pull ;
           systemctl restart errbot;
           systemctl status errbot;
-          cd /root/ && git add wgclient* && git commit -m "update wgclient" && git push;
+         # cd /root/ && git add wgclient* && git commit -m "update wgclient" && git push;
