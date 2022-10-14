@@ -53,7 +53,7 @@ class Wg(BotPlugin):
          self.send(mesg.frm, out) #send output to admin
    
    @botcmd (admin_only=True)
-   def showtime(self, mesg, args):
+   def showtime(self):
          id = self.build_identifier("85745624") #send message to me
          out = subprocess.check_output("wg" , shell=True, universal_newlines=True, stderr=subprocess.STDOUT) #get output from wg
          self.send(id, out) #send output to admin
@@ -258,7 +258,7 @@ class Wg(BotPlugin):
 
    @botcmd(admin_only=True)
    def push_on(self, mesg, args):
-      self.start_poller(int(args), self.showtime, times=None, mesg, args)
+      self.start_poller(int(args), self.showtime, times=None)
       self.send(mesg.frm, "Я буду показывать стату раз в " + str(args) + " минут")
    @botcmd(admin_only=True)
    def push_off(self, mesg, args):

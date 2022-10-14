@@ -1,3 +1,5 @@
 __pycache__/*
 err/*
 plugins/__pycache__/*
+config.py
+*.swp
