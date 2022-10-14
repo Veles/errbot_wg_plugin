@@ -1,0 +1,9 @@
+[Core]
+Name = Wg
+Module = wg
+
+[Documentation]
+Description = Create wireguard config
+
+[Python]
+Version = 3
