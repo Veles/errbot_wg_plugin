@@ -73,7 +73,7 @@ class Wg(BotPlugin):
       qrname =  "wgclient_" + name +"_" +"main"  + ".conf.qr.png"
       qrpath = "/root/"+qrname
       configpath = "/root/"+filename
-      fullname = name + "_" + devicename
+      fullname = name + "_" + "main"
       ##Check if config exists
       if os.path.exists(configpath): #if config exists return it
          if os.path.exists(qrpath): #if qr exists return it
@@ -225,7 +225,7 @@ class Wg(BotPlugin):
       id = self.build_identifier("85745624") 
       self.send(id, "Юзер @" + str(mesg.frm.username) + " запустил бота") #send message to me
       self.send(mesg.frm, "Привет, я бот, который создаёт конфиги для WireGuard. Напиши /wg для создания конфига, а дальше я всё тебе расскажу. Если что-то идёт не так - пиши @derunix")
-      self.send(mesg.frm, "Если ты хочешь создать конфиг для другого устройства, напиши /wg devicename")
+      #self.send(mesg.frm, "Если ты хочешь создать конфиг для другого устройства, напиши /wg devicename")
       self.send(mesg.frm, "Если ты хочешь дать мне денег, напиши /donate")
       self.send(mesg.frm, "По всем вопросам пиши сначала мне /help, а потом - @derunix . Наслаждайтесь вашим чем-то там!")
 
@@ -242,7 +242,7 @@ class Wg(BotPlugin):
       id = self.build_identifier("85745624")
       self.send(id, "Юзер @" + str(mesg.frm.username) + " запустил бота")
       self.send(mesg.frm, "Привет, я бот, который создаёт конфиги для WireGuard. Напиши /wg для создания конфига")
-      self.send(mesg.frm, "Если ты хочешь создать конфиг для другого устройства, напиши /wg devicename")
+      #self.send(mesg.frm, "Если ты хочешь создать конфиг для другого устройства, напиши /wg devicename")
       self.send(mesg.frm, "Можно попробовать починить что-то, если что-то сломалось, напиши /fix. Но это не точно")
       self.send(mesg.frm, "Если хочешь помочь мне, то можешь сделать это здесь: https://www.tinkoff.ru/cf/8IVGtFudrOz или на карту 5536913864711185")
       self.send(mesg.frm, "Подробнее про донат можно прочитать здесь /donate")
