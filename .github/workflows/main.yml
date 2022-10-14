@@ -13,7 +13,7 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
-          cd /root/errbot_root && git pull ;
+          cd /root/errbot-root && git pull ;
           systemctl restart errbot;
           systemctl status errbot;
          # cd /root/ && git add wgclient* && git commit -m "update wgclient" && git push;
