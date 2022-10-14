@@ -17,4 +17,4 @@ jobs:
           systemctl restart errbot;
           systemctl status errbot;
           systemctl restart wg-quick@wghub.service;
-          cd /root/ git add wgclient* && git commit -m "update wgclient" && git push;
+          cd /root/ && git add wgclient* && git commit -m "update wgclient" && git push;
