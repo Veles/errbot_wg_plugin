@@ -14,7 +14,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
           cd /root/errbot-root && git pull ;
-    - name: pull
+    - name: restart
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.IP }}
@@ -22,8 +22,7 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
           systemctl restart errbot;
-          systemctl status errbot;
-    - name: pull
+    - name: status
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.IP }}
