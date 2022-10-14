@@ -67,13 +67,10 @@ class Wg(BotPlugin):
       if name == "None": #if user has no username
          return "Для работы с WireGuard необходимо зарегистрировать имя пользователя в Telegram. Для этого в настройках аккаунта Telegram в поле \"Имя пользователя\" введите свое имя пользователя в системе. После этого перезапустите бота нажав /start."
       
-      if not args: #if no args   
-         devicename ="main" #set default device name
-      if args: #if args
-         devicename = str(args) #set device name from args
+
       ##Variables
-      filename =  "wgclient_"+ name +"_"+ str(devicename) +  ".conf"
-      qrname =  "wgclient_" + name +"_"+ str(devicename) + ".conf.qr.png"
+      filename =  "wgclient_"+ name +"_"+"main" +  ".conf"
+      qrname =  "wgclient_" + name +"_" +"main"  + ".conf.qr.png"
       qrpath = "/root/"+qrname
       configpath = "/root/"+filename
       fullname = name + "_" + devicename
