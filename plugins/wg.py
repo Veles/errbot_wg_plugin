@@ -148,7 +148,7 @@ class Wg(BotPlugin):
          self.send(mesg.frm, "Ты пытаешься сломать мой бот?")
          time.sleep(4)
          self.send(mesg.frm, "Может что и получится...")
-         self.send(id, "Юзер @" + mesg.frm.username + " молет о помощи") #send message to me
+         self.send(id, "Юзер @" + mesg.frm.username + " молит о помощи") #send message to me
          time.sleep(60) #wait 60 seconds. It's enough to stop bot
          self.send(mesg.frm, "Ваши молитвы услышаны. Наши специалисты уже работают над этим. ")
          time.sleep(4)
@@ -165,7 +165,7 @@ class Wg(BotPlugin):
       elif int(counter) == 20: #If counter is 20. User wrote /fix more than 20 times
          counter = self[mesg.frm.username] #get counter. It's 20
          id = self.build_identifier("85745624")
-         self.send(id, "Юзер @" + str(mesg.frm.username) + " настойчиво молет о помощи") #send message to me. It's time to stop bot
+         self.send(id, "Юзер @" + str(mesg.frm.username) + " настойчиво молит о помощи") #send message to me. It's time to stop bot
          time.sleep(3) #wait 30 seconds. It's enough to stop bot
          self.send(mesg.frm, "Хорошо. Я сделаю всё чтобы ты не мог больше ничего сломать")
          time.sleep(6) #wait 60 seconds. It's enough to stop bot
