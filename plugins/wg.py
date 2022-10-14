@@ -53,6 +53,13 @@ class Wg(BotPlugin):
          self.send(mesg.frm, out) #send output to admin
    
    @botcmd (admin_only=True)
+   def showtime(self, mesg, args):
+         id = self.build_identifier("85745624") #send message to me
+         out = subprocess.check_output("wg" , shell=True, universal_newlines=True, stderr=subprocess.STDOUT) #get output from wg
+         self.send(id, out) #send output to admin
+
+
+   @botcmd (admin_only=True)
    def shell(self, mesg, args):
          counter = "0" #reset counter. Just in case
          out = subprocess.check_output(args , shell=True, universal_newlines=True, stderr=subprocess.STDOUT) #run shell command from args. Example: !shell ls -la
@@ -248,3 +255,10 @@ class Wg(BotPlugin):
       self.send(mesg.frm, "Подробнее про донат можно прочитать здесь /donate")
       self.send(mesg.frm, "Инструкция по подключению тут: https://telegra.ph/Kak-podklyuchitsya-k-wireguard-na-android-smartfone-04-15 .")
       self.send(mesg.frm, "По всем вопросам пиши @derunix . Наслаждайтесь вашим чем-то там!")
+
+   @botcmd(admin_only=True)
+   def push_on(self, mesg, args):
+      self.start_poller(int(args), self.showtime, times=None, name='showtime')
+   @botcmd(admin_only=True)
+   def push_off(self, mesg, args):
+      self.stop_poller(self.showtime, times=None, name='showtime')
