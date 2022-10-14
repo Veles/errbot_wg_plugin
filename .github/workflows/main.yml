@@ -3,17 +3,19 @@ on: [push]
 jobs:
 
   build:
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.IP }}
-        username: ${{ secrets.USER }}
-        password: ${{ secrets.PRIVATE_KEY }}
-        port: ${{ secrets.PORT }}
-        script: |
-          cd Repository
-          ${{ secrets.SCRIPT}}
-          systemctl restart errbot
+   - name: pass environment
+     uses: appleboy/ssh-action@master
+     env:
+       FOO: "BAR"
+       BAR: "FOO"
+       SHA: ${{ github.sha }}
+     with:
+       host: ${{ secrets.IP }}
+       username: ${{ secrets.USERNAME }}
+       key: ${{ secrets.PRIVATE_KEY }}
+       port: ${{ secrets.PORT }}
+       envs: FOO,BAR
+       script: |
+         echo "I am $FOO"
+         echo "I am $BAR"
+         echo "sha: $SHA"
