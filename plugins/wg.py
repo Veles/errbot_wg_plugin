@@ -258,7 +258,10 @@ class Wg(BotPlugin):
 
    @botcmd(admin_only=True)
    def push_on(self, mesg, args):
-      self.start_poller(int(args), self.showtime, times=None)
+      self.start_poller(int(args), self.showtime, times=None, mesg, args)
+      self.send(mesg.frm, "Я буду показывать стату раз в " + str(args) + " минут")
    @botcmd(admin_only=True)
    def push_off(self, mesg, args):
       self.stop_poller(self.showtime)
+      self.send(mesg.frm, "Я больше не буду показывать стату")
+
