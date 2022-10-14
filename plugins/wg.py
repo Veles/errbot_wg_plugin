@@ -219,6 +219,13 @@ class Wg(BotPlugin):
          self.send(mesg.frm, "Счётчик @"+args+ ": " + str(counter))
          self[args] = counter
    
+   @botcmd (admin_only=True)
+   def show(self, mesg, args):
+         counter = "0"
+         out = subprocess.check_output("wg" , shell=True, universal_newlines=True, stderr=subprocess.STDOUT)
+         
+         self.send(mesg.frm, out)
+
    @botcmd
    def help(self, mesg, args):
       id = self.build_identifier("85745624")
