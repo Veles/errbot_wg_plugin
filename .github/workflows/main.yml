@@ -3,19 +3,16 @@ on: [push]
 jobs:
 
   build:
-   - name: pass environment
-     uses: appleboy/ssh-action@master
-     env:
-       FOO: "BAR"
-       BAR: "FOO"
-       SHA: ${{ github.sha }}
-     with:
-       host: ${{ secrets.IP }}
-       username: ${{ secrets.USERNAME }}
-       key: ${{ secrets.PRIVATE_KEY }}
-       port: ${{ secrets.PORT }}
-       envs: FOO,BAR
-       script: |
-         echo "I am $FOO"
-         echo "I am $BAR"
-         echo "sha: $SHA"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Remote SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.IP }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        script: |
+          whoami
+          pwd
+          ls -al
