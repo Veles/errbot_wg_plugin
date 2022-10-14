@@ -258,7 +258,7 @@ class Wg(BotPlugin):
 
    @botcmd(admin_only=True)
    def push_on(self, mesg, args):
-      self.start_poller(int(args), self.showtime, times=None, name='showtime')
+      self.start_poller(int(args), self.showtime, times=None)
    @botcmd(admin_only=True)
    def push_off(self, mesg, args):
-      self.stop_poller(self.showtime, times=None, name='showtime')
+      self.stop_poller(self.showtime)
