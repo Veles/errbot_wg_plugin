@@ -2,11 +2,11 @@ name: Remote SSH
 on: [push]
 jobs:
 
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Remote SSH
+    - name: pull
       uses: appleboy/ssh-action@master
       with:
         host: ${{ secrets.IP }}
@@ -14,6 +14,20 @@ jobs:
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
           cd /root/errbot-root && git pull ;
+    - name: pull
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.IP }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: |
           systemctl restart errbot;
           systemctl status errbot;
-         # cd /root/ && git add wgclient* && git commit -m "update wgclient" && git push;
+    - name: pull
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.IP }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        script: |
+          systemctl status errbot;
