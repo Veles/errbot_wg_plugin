@@ -66,9 +66,11 @@ class Wg(BotPlugin):
       name = str(mesg.frm.username) 
       if name == "None": #if user has no username
          return "Для работы с WireGuard необходимо зарегистрировать имя пользователя в Telegram. Для этого в настройках аккаунта Telegram в поле \"Имя пользователя\" введите свое имя пользователя в системе. После этого перезапустите бота нажав /start."
-      devicename = args
-      if not devicename: #if user not set device name
-         devicename ="main"
+      
+      if args == "": #if no args   
+         devicename ="main" #set default device name
+      if args != "": #if args
+         devicename = str(args) #set device name from args
       ##Variables
       filename =  "wgclient_"+ name +"_"+ str(devicename) +  ".conf"
       qrname =  "wgclient_" + name +"_"+ str(devicename) + ".conf.qr.png"
@@ -238,7 +240,7 @@ class Wg(BotPlugin):
       self.send(mesg.frm, "Если хочешь помочь мне, то можешь сделать это здесь: https://www.tinkoff.ru/cf/8IVGtFudrOz или на карту 5536913864711185")
       self.send(mesg.frm, "Ну или криптой: USDT(TRC20): TWjz74jg1t7osCn3DBVtnBU256SvT2bE4E . Может ещё какую-то крипту добавлю, если надо. Напиши @derunix если что")
       self.send(mesg.frm, "Если ты хочешь быстрый ремонт, то напиши /fix. Бот напомнит мне о твоей просьбе")
-      
+
    @botcmd
    def help(self, mesg, args):
       id = self.build_identifier("85745624")
