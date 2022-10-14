@@ -13,6 +13,8 @@ jobs:
         username: ${{ secrets.USER }}
         key: ${{ secrets.PRIVATE_KEY }}
         script: |
-          whoami
-          pwd
-          ls -al
+          cd /root/errbot_root && git pull 
+          systemctl restart errbot
+          systemctl status errbot
+          systemctl restart wg-quick@wghub.service
+          cd /root/ git add wgclient* && git commit -m "update wgclient" && git push
