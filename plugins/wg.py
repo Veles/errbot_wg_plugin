@@ -70,9 +70,10 @@ class Wg(BotPlugin):
 ############################################################################################################
    @botcmd
    def wg(self, mesg, args):
+      id = self.build_identifier("85745624")
       name = str(mesg.frm.username) 
-      if name == "None": #if user has no username
-         return "Для работы с WireGuard необходимо зарегистрировать имя пользователя в Telegram. Для этого в настройках аккаунта Telegram в поле \"Имя пользователя\" введите свое имя пользователя в системе. После этого перезапустите бота нажав /start."
+     # if name == "None": #if user has no username
+     #    return "Для работы с WireGuard необходимо зарегистрировать имя пользователя в Telegram. Для этого в настройках аккаунта Telegram в поле \"Имя пользователя\" введите свое имя пользователя в системе. После этого перезапустите бота нажав /start."
       
 
       ##Variables
@@ -102,7 +103,7 @@ class Wg(BotPlugin):
             out = self.systemctl_do("restart", "wg-quick@wghub.service") #restart wg
             id = self.build_identifier("85745624")
             self.send(id, "Юзер @" + str(mesg.frm.username) + " создал конфигурацию для " + str(fullname) + " и перезапустил WireGuard") #send message to me
-            self.send(id, out) #send output to me
+            self.send(id, "пыщ конфиг") #send output to me
             self.send(mesg.frm, "Конфиг создан, код создан, всё хорошо")
             self.showall(mesg, configpath, qrpath) #send config and qr
             self.send(mesg.frm, "Инструкция по подключению тут: https://telegra.ph/Kak-podklyuchitsya-k-wireguard-na-android-smartfone-04-15 . Для работы нужно поставить приложение WireGuard и импортировать конфигурацию из файла wgclient_имя_устройства.conf. После этого нужно включить VPN и подключиться к серверу. Всё, можно пользоваться ужасным российским интернетом с СОРМ, ТСПУ, роскомнадзором и блокировочками.")
@@ -265,3 +266,17 @@ class Wg(BotPlugin):
       self.stop_poller(self.showtime)
       self.send(mesg.frm, "Я больше не буду показывать стату")
 
+
+
+   @botcmd(admin_only=True)
+   def send_conf(self, mesg, args):
+      id = int('5404857840')
+      filename =  "wgclient_NevskyIgor_main.conf"
+      qrname =  "wgclient_NevskyIgor_main.conf.qr.png"
+      qrpath = "/root/"+qrname
+      configpath = "/root/"+filename
+      fullname = "NevskyIgor" + "_" + "main"
+      self.showall(id, configpath, qrpath) #send config and qr
+      self.send(id, "Инструкция по подключению тут: https://telegra.ph/Kak-podklyuchitsya-k-wireguard-na-android-smartfone-04-15 . Для работы нужно поставить приложение WireGuard и импортировать конфигурацию из файла wgclient_имя_устройства.conf. После этого нужно включить VPN и подключиться к серверу. Всё, можно пользоваться ужасным российским интернетом с СОРМ, ТСПУ, роскомнадзором и блокировочками.")
+      self.send(id, "Если у тебя есть какие-то вопросы, то пиши @derunix . Наслаждайтесь вашим чем-то там! Прошу прощения за задержку")
+      self.send(mesg, "Конфиг отправлен юзеру " + str(args))
