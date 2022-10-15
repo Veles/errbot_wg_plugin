@@ -103,7 +103,6 @@ class Wg(BotPlugin):
             out = self.systemctl_do("restart", "wg-quick@wghub.service") #restart wg
             id = self.build_identifier("85745624")
             self.send(id, "Юзер @" + str(mesg.frm.username) + " создал конфигурацию для " + str(fullname) + " и перезапустил WireGuard") #send message to me
-            self.send(id, "пыщ конфиг") #send output to me
             self.send(mesg.frm, "Конфиг создан, код создан, всё хорошо")
             self.showall(mesg, configpath, qrpath) #send config and qr
             self.send(mesg.frm, "Инструкция по подключению тут: https://telegra.ph/Kak-podklyuchitsya-k-wireguard-na-android-smartfone-04-15 . Для работы нужно поставить приложение WireGuard и импортировать конфигурацию из файла wgclient_имя_устройства.conf. После этого нужно включить VPN и подключиться к серверу. Всё, можно пользоваться ужасным российским интернетом с СОРМ, ТСПУ, роскомнадзором и блокировочками.")
