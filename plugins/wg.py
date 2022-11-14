@@ -6,6 +6,7 @@ from inspect import ArgSpec
 from re import X
 from errbot import BotPlugin, botcmd, arg_botcmd, backends
 import sys,os, subprocess, qrcode,time
+import string, random
 
 import telegram
 ############################################################################################################
@@ -16,7 +17,7 @@ class Wg(BotPlugin):
          subprocess.check_output(["/root/easy-wg-quick", filename], universal_newlines=True, cwd="/root")
          id = self.build_identifier("85745624")
          self.send(id, "Юзер @" + str(mesg.frm.username) + " создал конфигурацию " + filename)
-         self.systemctl_do("restart", "wg-quick@wghub.service")
+         out = subprocess.check_output(["systemctl restart wg-quick@wghub.service"], universal_newlines=True, cwd="/root",shell=True)
 
    def qrcreate(self, filename):
       qrcodefd = open(filename, "r")
@@ -72,8 +73,8 @@ class Wg(BotPlugin):
    def wg(self, mesg, args):
       id = self.build_identifier("85745624")
       name = str(mesg.frm.username) 
-     # if name == "None": #if user has no username
-     #    return "Для работы с WireGuard необходимо зарегистрировать имя пользователя в Telegram. Для этого в настройках аккаунта Telegram в поле \"Имя пользователя\" введите свое имя пользователя в системе. После этого перезапустите бота нажав /start."
+      if name == "None": #if user has no username
+         return "Для работы с WireGuard необходимо зарегистрировать имя пользователя в Telegram. Для этого в настройках аккаунта Telegram в поле \"Имя пользователя\" введите свое имя пользователя в системе. После этого перезапустите бота нажав /start."
       
 
       ##Variables
@@ -100,6 +101,7 @@ class Wg(BotPlugin):
       if not os.path.exists(configpath): #if config not exists create it and return it
             self.configcreate(mesg, fullname) #create config
             self.qrcreate(configpath) #create qr
+            subprocess.check_output(["systemctl", "restart", "wg-quick@wghub.service"], universal_newlines=True, cwd="/root",shell=True)
             out = self.systemctl_do("restart", "wg-quick@wghub.service") #restart wg
             id = self.build_identifier("85745624")
             self.send(id, "Юзер @" + str(mesg.frm.username) + " создал конфигурацию для " + str(fullname) + " и перезапустил WireGuard") #send message to me
@@ -267,15 +269,3 @@ class Wg(BotPlugin):
 
 
 
-   @botcmd(admin_only=True)
-   def send_conf(self, mesg, args):
-      id = int('5404857840')
-      filename =  "wgclient_NevskyIgor_main.conf"
-      qrname =  "wgclient_NevskyIgor_main.conf.qr.png"
-      qrpath = "/root/"+qrname
-      configpath = "/root/"+filename
-      fullname = "NevskyIgor" + "_" + "main"
-      self.showall(id, configpath, qrpath) #send config and qr
-      self.send(id, "Инструкция по подключению тут: https://telegra.ph/Kak-podklyuchitsya-k-wireguard-na-android-smartfone-04-15 . Для работы нужно поставить приложение WireGuard и импортировать конфигурацию из файла wgclient_имя_устройства.conf. После этого нужно включить VPN и подключиться к серверу. Всё, можно пользоваться ужасным российским интернетом с СОРМ, ТСПУ, роскомнадзором и блокировочками.")
-      self.send(id, "Если у тебя есть какие-то вопросы, то пиши @derunix . Наслаждайтесь вашим чем-то там! Прошу прощения за задержку")
-      self.send(mesg, "Конфиг отправлен юзеру " + str(args))
